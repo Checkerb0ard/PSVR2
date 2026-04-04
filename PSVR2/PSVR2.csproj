@@ -1,0 +1,557 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>disable</Nullable>
+        <RootNamespace>PSVR2</RootNamespace>
+        <LangVersion>default</LangVersion>
+        <IsPackable>false</IsPackable>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+        <FileVersion>1.0.0.0</FileVersion>
+        <NeutralLanguage>en-US</NeutralLanguage>
+        <AssemblyName>PSVR2</AssemblyName>
+        <LangVersion>latest</LangVersion>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Reference Include="Assembly-CSharp">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Assembly-CSharp.dll</HintPath>
+        </Reference>
+        <Reference Include="BoneLib">
+            <HintPath>$(BONELAB_DIR)\Mods\BoneLib.dll</HintPath>
+        </Reference>
+        <Reference Include="EyeTracking">
+            <HintPath>$(BONELAB_DIR)\Mods\EyeTracking.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2CppFacepunch.Steamworks.Win64">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Il2CppFacepunch.Steamworks.Win64.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2CppGoogle.Protobuf">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Il2CppGoogle.Protobuf.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2CppGrpc.Core">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Il2CppGrpc.Core.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2CppHBAO.Demo.Runtime">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Il2CppHBAO.Demo.Runtime.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2CppHBAO.Demo.Universal.Runtime">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Il2CppHBAO.Demo.Universal.Runtime.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2CppHBAO.Runtime">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Il2CppHBAO.Runtime.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2CppHBAO.Universal.Runtime">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Il2CppHBAO.Universal.Runtime.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2CppMeshBakerCore">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Il2CppMeshBakerCore.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2CppMicrosoft.Extensions.Configuration.Abstractions">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Il2CppMicrosoft.Extensions.Configuration.Abstractions.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2CppMicrosoft.Extensions.Configuration.Binder">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Il2CppMicrosoft.Extensions.Configuration.Binder.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2CppMicrosoft.Extensions.Configuration">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Il2CppMicrosoft.Extensions.Configuration.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2CppMicrosoft.Extensions.DependencyInjection.Abstractions">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Il2CppMicrosoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2CppMicrosoft.Extensions.DependencyInjection">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Il2CppMicrosoft.Extensions.DependencyInjection.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2CppMicrosoft.Extensions.Logging.Abstractions">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Il2CppMicrosoft.Extensions.Logging.Abstractions.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2CppMicrosoft.Extensions.Logging.Configuration">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Il2CppMicrosoft.Extensions.Logging.Configuration.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2CppMicrosoft.Extensions.Logging">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Il2CppMicrosoft.Extensions.Logging.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2CppMicrosoft.Extensions.Options.ConfigurationExtensions">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Il2CppMicrosoft.Extensions.Options.ConfigurationExtensions.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2CppMicrosoft.Extensions.Options">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Il2CppMicrosoft.Extensions.Options.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2CppMicrosoft.Extensions.Primitives">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Il2CppMicrosoft.Extensions.Primitives.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2CppMicrosoft.MixedReality.OpenXR">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Il2CppMicrosoft.MixedReality.OpenXR.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2CppMono.Security">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Il2CppMono.Security.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2Cppmscorlib">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Il2Cppmscorlib.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2CppNavMeshComponents">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Il2CppNavMeshComponents.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2CppNewtonsoft.Json">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Il2CppNewtonsoft.Json.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2CppOccaSoftware.Exposure">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Il2CppOccaSoftware.Exposure.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2CppOculus.Platform">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Il2CppOculus.Platform.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2CppOculus.VR">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Il2CppOculus.VR.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2CppRayFireAssembly">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Il2CppRayFireAssembly.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2CppRFLib_DotNet_2018">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Il2CppRFLib_DotNet_2018.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2CppRootMotion">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Il2CppRootMotion.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2CppSLZ.Algorithms">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Il2CppSLZ.Algorithms.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2CppSLZ.Algorithms.Unity">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Il2CppSLZ.Algorithms.Unity.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2CppSLZ.Marrow">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Il2CppSLZ.Marrow.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2CppSLZ.Marrow.VoidLogic.Core">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Il2CppSLZ.Marrow.VoidLogic.Core.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2CppSLZ.Marrow.VoidLogic.Engine">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Il2CppSLZ.Marrow.VoidLogic.Engine.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2CppSLZ.ModIO">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Il2CppSLZ.ModIO.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2CppSLZ.Serialize">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Il2CppSLZ.Serialize.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2CppSystem.Configuration">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Il2CppSystem.Configuration.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2CppSystem.Core">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Il2CppSystem.Core.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2CppSystem.Data">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Il2CppSystem.Data.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2CppSystem">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Il2CppSystem.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2CppSystem.IO.Compression">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Il2CppSystem.IO.Compression.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2CppSystem.IO.Compression.FileSystem">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Il2CppSystem.IO.Compression.FileSystem.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2CppSystem.Net.Http">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Il2CppSystem.Net.Http.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2CppSystem.Numerics">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Il2CppSystem.Numerics.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2CppSystem.Runtime.CompilerServices.Unsafe">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Il2CppSystem.Runtime.CompilerServices.Unsafe.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2CppSystem.Runtime.Serialization">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Il2CppSystem.Runtime.Serialization.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2CppSystem.ServiceModel.Internals">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Il2CppSystem.ServiceModel.Internals.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2CppSystem.Threading.Channels">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Il2CppSystem.Threading.Channels.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2CppSystem.Xml">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Il2CppSystem.Xml.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2CppSystem.Xml.Linq">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Il2CppSystem.Xml.Linq.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2CppUltEvents">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Il2CppUltEvents.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2CppUniTask.Addressables">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Il2CppUniTask.Addressables.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2CppUniTask">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Il2CppUniTask.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2CppUniTask.Linq">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Il2CppUniTask.Linq.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2CppURPUnsafe">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Il2CppURPUnsafe.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2Cppwebsocket-sharp">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Il2Cppwebsocket-sharp.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2CppWhinarn.UnityMeshSimplifier.Runtime">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Il2CppWhinarn.UnityMeshSimplifier.Runtime.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2CppZLogger">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Il2CppZLogger.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2CppZString">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Il2CppZString.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2Cpp__Generated">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Il2Cpp__Generated.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.Addressables">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Unity.Addressables.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.Animation.Rigging">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Unity.Animation.Rigging.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.Barracuda.BurstBLAS">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Unity.Barracuda.BurstBLAS.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.Barracuda">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Unity.Barracuda.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.Burst">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Unity.Burst.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.Burst.Unsafe">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Unity.Burst.Unsafe.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.Collections">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Unity.Collections.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.InputSystem">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Unity.InputSystem.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.Mathematics">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Unity.Mathematics.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.ML-Agents.CommunicatorObjects">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Unity.ML-Agents.CommunicatorObjects.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.ML-Agents">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Unity.ML-Agents.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.ProBuilder">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Unity.ProBuilder.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.ProBuilder.KdTree">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Unity.ProBuilder.KdTree.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.ProBuilder.Poly2Tri">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Unity.ProBuilder.Poly2Tri.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.Profiling.Core">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Unity.Profiling.Core.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.RenderPipeline.Universal.ShaderLibrary">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Unity.RenderPipeline.Universal.ShaderLibrary.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.RenderPipelines.Core.Runtime">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Unity.RenderPipelines.Core.Runtime.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.RenderPipelines.Universal.Runtime">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Unity.RenderPipelines.Universal.Runtime.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.RenderPipelines.Universal.StressLevelZero.VRS">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Unity.RenderPipelines.Universal.StressLevelZero.VRS.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.ResourceManager">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Unity.ResourceManager.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.Splines">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Unity.Splines.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.Splines.Examples">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Unity.Splines.Examples.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.TextMeshPro">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Unity.TextMeshPro.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.Timeline">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Unity.Timeline.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.XR.ARFoundation">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Unity.XR.ARFoundation.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.XR.ARSubsystems">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Unity.XR.ARSubsystems.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.XR.CoreUtils">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Unity.XR.CoreUtils.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.XR.Interaction.Toolkit">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Unity.XR.Interaction.Toolkit.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.XR.Management">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Unity.XR.Management.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.XR.MockHMD">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Unity.XR.MockHMD.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.XR.Oculus">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Unity.XR.Oculus.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.XR.OpenXR">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Unity.XR.OpenXR.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.XR.OpenXR.Features.ConformanceAutomation">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Unity.XR.OpenXR.Features.ConformanceAutomation.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.XR.OpenXR.Features.MetaQuestSupport">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Unity.XR.OpenXR.Features.MetaQuestSupport.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.XR.OpenXR.Features.MockRuntime">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Unity.XR.OpenXR.Features.MockRuntime.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.XR.OpenXR.Features.OculusQuestSupport">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Unity.XR.OpenXR.Features.OculusQuestSupport.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.XR.OpenXR.Features.RuntimeDebugger">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Unity.XR.OpenXR.Features.RuntimeDebugger.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.AccessibilityModule">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\UnityEngine.AccessibilityModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.AIModule">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\UnityEngine.AIModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.AndroidJNIModule">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\UnityEngine.AndroidJNIModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.AnimationModule">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\UnityEngine.AnimationModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.ARModule">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\UnityEngine.ARModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.AssetBundleModule">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\UnityEngine.AssetBundleModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.AudioModule">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\UnityEngine.AudioModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.ClothModule">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\UnityEngine.ClothModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.CoreModule">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\UnityEngine.CoreModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.CrashReportingModule">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\UnityEngine.CrashReportingModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.DirectorModule">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\UnityEngine.DirectorModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\UnityEngine.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.DSPGraphModule">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\UnityEngine.DSPGraphModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.GameCenterModule">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\UnityEngine.GameCenterModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.GIModule">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\UnityEngine.GIModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.GridModule">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\UnityEngine.GridModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.HotReloadModule">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\UnityEngine.HotReloadModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.ImageConversionModule">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\UnityEngine.ImageConversionModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.IMGUIModule">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\UnityEngine.IMGUIModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.InputLegacyModule">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\UnityEngine.InputLegacyModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.InputModule">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\UnityEngine.InputModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.JSONSerializeModule">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\UnityEngine.JSONSerializeModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.LocalizationModule">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\UnityEngine.LocalizationModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.ParticleSystemModule">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\UnityEngine.ParticleSystemModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.PerformanceReportingModule">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\UnityEngine.PerformanceReportingModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.Physics2DModule">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\UnityEngine.Physics2DModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.PhysicsModule">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\UnityEngine.PhysicsModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.ProfilerModule">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\UnityEngine.ProfilerModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.ScreenCaptureModule">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\UnityEngine.ScreenCaptureModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.SharedInternalsModule">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\UnityEngine.SharedInternalsModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.SpatialTracking">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\UnityEngine.SpatialTracking.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.SpriteMaskModule">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\UnityEngine.SpriteMaskModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.SpriteShapeModule">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\UnityEngine.SpriteShapeModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.StreamingModule">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\UnityEngine.StreamingModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.SubstanceModule">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\UnityEngine.SubstanceModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.SubsystemsModule">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\UnityEngine.SubsystemsModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.TerrainModule">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\UnityEngine.TerrainModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.TerrainPhysicsModule">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\UnityEngine.TerrainPhysicsModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.TextCoreFontEngineModule">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\UnityEngine.TextCoreFontEngineModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.TextCoreTextEngineModule">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\UnityEngine.TextCoreTextEngineModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.TextRenderingModule">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\UnityEngine.TextRenderingModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.TilemapModule">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\UnityEngine.TilemapModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.TLSModule">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\UnityEngine.TLSModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.UI">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\UnityEngine.UI.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.UIElementsModule">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\UnityEngine.UIElementsModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.UIElementsNativeModule">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\UnityEngine.UIElementsNativeModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.UIModule">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\UnityEngine.UIModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.UmbraModule">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\UnityEngine.UmbraModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.UNETModule">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\UnityEngine.UNETModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.UnityAnalyticsCommonModule">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\UnityEngine.UnityAnalyticsCommonModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.UnityAnalyticsModule">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\UnityEngine.UnityAnalyticsModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.UnityConnectModule">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\UnityEngine.UnityConnectModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.UnityCurlModule">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\UnityEngine.UnityCurlModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.UnityTestProtocolModule">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\UnityEngine.UnityTestProtocolModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.UnityWebRequestAssetBundleModule">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\UnityEngine.UnityWebRequestAssetBundleModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.UnityWebRequestAudioModule">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\UnityEngine.UnityWebRequestAudioModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.UnityWebRequestModule">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\UnityEngine.UnityWebRequestModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.UnityWebRequestTextureModule">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\UnityEngine.UnityWebRequestTextureModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.UnityWebRequestWWWModule">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\UnityEngine.UnityWebRequestWWWModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.VehiclesModule">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\UnityEngine.VehiclesModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.VFXModule">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\UnityEngine.VFXModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.VideoModule">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\UnityEngine.VideoModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.VRModule">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\UnityEngine.VRModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.WindModule">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\UnityEngine.WindModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.XRModule">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\UnityEngine.XRModule.dll</HintPath>
+        </Reference>
+        <Reference Include="MelonLoader">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\net6\MelonLoader.dll</HintPath>
+        </Reference>
+        <Reference Include="0Harmony">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\net6\0Harmony.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2CppInterop.Runtime">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\net6\Il2CppInterop.Runtime.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2CppInterop.Common">
+            <HintPath>$(BONELAB_DIR)\MelonLoader\net6\Il2CppInterop.Common.dll</HintPath>
+        </Reference>
+
+    </ItemGroup>
+
+    <PropertyGroup>
+        <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+        <EnableDefaultCompileItems>true</EnableDefaultCompileItems>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+        <DefineConstants>TRACE;UNITY_5_3_OR_NEWER</DefineConstants>
+        <DebugType>embedded</DebugType>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+        <DefineConstants>TRACE;UNITY_5_3_OR_NEWER</DefineConstants>
+    </PropertyGroup>
+
+    <Target Name="ClearReferenceCopyLocalPaths" AfterTargets="ResolveAssemblyReferences">
+        <ItemGroup>
+            <ReferenceCopyLocalPaths Remove="@(ReferenceCopyLocalPaths)"/>
+        </ItemGroup>
+    </Target>
+
+    <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+        <Exec Command="COPY &quot;$(TargetPath)&quot; &quot;$(GamePath)/Mods&quot;" />
+    </Target>
+</Project>
