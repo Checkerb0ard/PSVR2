@@ -1,5 +1,3 @@
-#define DISABLELEFT
-
 using BoneLib;
 using HarmonyLib;
 using Il2CppSLZ.Marrow;
@@ -151,11 +149,7 @@ internal class AdaptiveTriggers : IFeature
 
             if (hand == Player.LeftHand)
             {
-                #if DISABLELEFT
-                return;
-                #else
                 controller = EVRControllerType.Left;
-                #endif
             }
             else if (hand == Player.RightHand)
             {

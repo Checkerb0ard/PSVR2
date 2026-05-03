@@ -220,7 +220,7 @@ namespace PSVR2Toolkit.CAPI {
             if ( !m_running )
                 return;
 
-            int dataLen = data.Equals(default(T)) ? 0 : Marshal.SizeOf<T>();
+            int dataLen = Marshal.SizeOf<T>();
             int bufferLen = Marshal.SizeOf<CommandHeader>() + dataLen;
             byte[] buffer = new byte[bufferLen];
 

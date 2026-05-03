@@ -1,6 +1,6 @@
 {
   "name": "PSVR2",
-  "version_number": "1.1.0",
+  "version_number": "1.1.1",
   "website_url": "https://github.com/Checkerb0ard/PSVR2",
   "description": "PSVR2 specific features",
   "dependencies": ["bonelib-BoneLib-3.2.1"]
