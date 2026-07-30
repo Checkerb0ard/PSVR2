@@ -7,11 +7,6 @@ namespace PSVR2.Features;
 
 internal class FingerCurl : IFeature
 {
-    public void Initialize()
-    {
-        
-    }
-
     [HarmonyPatch(typeof(OpenController))]
     private static class OpenControllerPatches
     {

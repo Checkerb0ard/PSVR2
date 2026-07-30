@@ -12,6 +12,8 @@ Adds support for PSVR2 specific features such as adaptive triggers.
 - 1.0.2 - Minor changes to the README. Removed eye tracking as an optional dependency since the mod would throw an error without it.
 - 1.1.0 - Almost complete rewrite of the mod. The EyeTracking mod is no longer a hard dependency.
 - 1.1.1 - (Finnaly) Fixed the left controller adaptive trigger not disabling.
+- 1.2.0 - Updated to PSVR2 ToolKit 1.0.0 CAPI system. Added headset rumble on player damage. 
+- 1.2.1 - Included CAPI loader. (oops)
 
 ## Support
 If you encounter any issues, ping me in the [BONELAB Discord](https://discord.gg/bonelab) ``checkerboard``

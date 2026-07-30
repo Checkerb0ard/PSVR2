@@ -2,6 +2,6 @@
 
 internal interface IFeature
 {
-    internal abstract void Initialize();
+    internal virtual void Initialize() { }
     internal virtual void OnUpdate() { }
 }

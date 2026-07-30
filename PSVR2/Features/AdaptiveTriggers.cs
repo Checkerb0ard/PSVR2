@@ -1,7 +1,7 @@
 using BoneLib;
 using HarmonyLib;
 using Il2CppSLZ.Marrow;
-using PSVR2Toolkit.CAPI;
+using PSVR2Toolkit;
 
 namespace PSVR2.Features;
 
@@ -43,13 +43,13 @@ internal class AdaptiveTriggers : IFeature
 
     private static class TriggerManager
     {
-        private static readonly Dictionary<EVRControllerType, TriggerState> States = new()
+        private static readonly Dictionary<VRControllerType, TriggerState> States = new()
         {
-            { EVRControllerType.Left, new TriggerState() },
-            { EVRControllerType.Right, new TriggerState() }
+            { VRControllerType.Left, new TriggerState() },
+            { VRControllerType.Right, new TriggerState() }
         };
 
-        internal static void SetNone(EVRControllerType controller, bool force = false)
+        internal static void SetNone(VRControllerType controller, bool force = false)
         {
             var s = States[controller];
             if (!force && s.Mode == FeedbackMode.None) return;
@@ -58,7 +58,7 @@ internal class AdaptiveTriggers : IFeature
             s.Dirty = true;
         }
 
-        internal static void SetWeapon(EVRControllerType controller, byte start, byte end, byte strength)
+        internal static void SetWeapon(VRControllerType controller, byte start, byte end, byte strength)
         {
             var s = States[controller];
 
@@ -73,7 +73,7 @@ internal class AdaptiveTriggers : IFeature
             s.Dirty = true;
         }
 
-        internal static void SetVibration(EVRControllerType controller, byte pos, byte amp, byte freq)
+        internal static void SetVibration(VRControllerType controller, byte pos, byte amp, byte freq)
         {
             var s = States[controller];
 
@@ -97,21 +97,36 @@ internal class AdaptiveTriggers : IFeature
 
                 try
                 {
-                    var ipc = Core.Instance.ToolkitManager.IpcClient;
+                    var command = new ScePadTriggerEffectCommand();
                     
                     switch (s.Mode)
                     {
                         case FeedbackMode.None:
-                            ipc.TriggerEffectDisable(controller);
+                        {
+                            command.mode = ScePadTriggerEffectMode.SCE_PAD_TRIGGER_EFFECT_MODE_OFF;
+                            PSVR2ToolkitCAPI.SetTriggerEffect(controller, ref command);
                             break;
+                        }
 
                         case FeedbackMode.Weapon:
-                            ipc.TriggerEffectWeapon(controller, s.Start, s.End, s.Strength);
+                        {
+                            command.mode = ScePadTriggerEffectMode.SCE_PAD_TRIGGER_EFFECT_MODE_WEAPON;
+                            command.commandData.weaponStartPosition = s.Start;
+                            command.commandData.weaponEndPosition = s.End;
+                            command.commandData.weaponStrength = s.Strength;
+                            PSVR2ToolkitCAPI.SetTriggerEffect(controller, ref command);
                             break;
+                        }
 
                         case FeedbackMode.Vibration:
-                            ipc.TriggerEffectVibration(controller, s.Position, s.Amplitude, s.Frequency);
+                        {
+                            command.mode = ScePadTriggerEffectMode.SCE_PAD_TRIGGER_EFFECT_MODE_VIBRATION;
+                            command.commandData.vibrationPosition = s.Position;
+                            command.commandData.vibrationAmplitude = s.Amplitude;
+                            command.commandData.vibrationFrequency = s.Frequency;
+                            PSVR2ToolkitCAPI.SetTriggerEffect(controller, ref command);
                             break;
+                        }
                     }
                 }
                 catch (Exception e)
@@ -125,8 +140,8 @@ internal class AdaptiveTriggers : IFeature
 
         internal static void ForceDisableAll()
         {
-            SetNone(EVRControllerType.Left, true);
-            SetNone(EVRControllerType.Right, true);
+            SetNone(VRControllerType.Left, true);
+            SetNone(VRControllerType.Right, true);
         }
     }
 
@@ -145,15 +160,15 @@ internal class AdaptiveTriggers : IFeature
             if (hand == null)
                 return;
 
-            EVRControllerType controller;
+            VRControllerType controller;
 
             if (hand == Player.LeftHand)
             {
-                controller = EVRControllerType.Left;
+                controller = VRControllerType.Left;
             }
             else if (hand == Player.RightHand)
             {
-                controller = EVRControllerType.Right;
+                controller = VRControllerType.Right;
             }
             else
             {
@@ -162,7 +177,6 @@ internal class AdaptiveTriggers : IFeature
 
             if (__instance._magState == null ||
                 __instance._ammoInventory == null ||
-                __instance.AmmoCount() <= 0 ||
                 __instance.chamberedCartridge == null)
             {
                 TriggerManager.SetNone(controller);
@@ -201,15 +215,15 @@ internal class AdaptiveTriggers : IFeature
             if (hand == null)
                 return;
             
-            EVRControllerType controller;
+            VRControllerType controller;
 
             if (hand == Player.LeftHand)
             {
-                controller = EVRControllerType.Left;
+                controller = VRControllerType.Left;
             }
             else if (hand == Player.RightHand)
             {
-                controller = EVRControllerType.Right;
+                controller = VRControllerType.Right;
             }
             else
             {

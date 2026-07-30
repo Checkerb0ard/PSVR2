@@ -1,5 +1,6 @@
 using EyeTracking;
 using EyeTracking.TrackingProviders;
+using PSVR2Toolkit;
 using PSVR2Toolkit.Utilities;
 
 namespace PSVR2.Features;
@@ -29,23 +30,17 @@ public class PSVR2EyeTracking : TrackingProvider
         if (Core.Instance?.ToolkitManager?.Loaded != true)
             return;
 
-        if (!Core.Instance.ToolkitManager.IpcClient.IsRunning)
-            return;
-
-        var eyeTrackingData = Core.Instance.ToolkitManager.IpcClient.RequestEyeTrackingData();
-
-        if (eyeTrackingData.leftEye.isBlinkValid)
+        hmd2_gaze_status_t gazeStatus = new hmd2_gaze_status_t();
+        
+        if (!PSVR2ToolkitCAPI.GetGazeStatus(ref gazeStatus, 1000))
         {
-            float leftOpenness;
+            Core.Instance.LoggerInstance.Error("Failed to get gaze status from PSVR2Toolkit.");
+            return;
+        }
 
-            if (eyeTrackingData.leftEye.isOpenEnabled && Core.Instance.PreferencesManager.EyeLidEstimation.Value)
-            {
-                leftOpenness = eyeTrackingData.leftEye.open;
-            }
-            else
-            {
-                leftOpenness = eyeTrackingData.leftEye.blink ? 0 : 1;
-            }
+        if (gazeStatus.wearable.left.is_blink_valid == hmd2_gaze_bool_t.HMD2_GAZE_BOOL_TRUE)
+        {
+            float leftOpenness = gazeStatus.wearable.left.blink == hmd2_gaze_bool_t.HMD2_GAZE_BOOL_TRUE ? 0 : 1;
             
             if (leftEyeFilter != null)
             {
@@ -55,18 +50,9 @@ public class PSVR2EyeTracking : TrackingProvider
             Tracking.EyeData.Left.Openness = leftOpenness;
         }
 
-        if (eyeTrackingData.rightEye.isBlinkValid)
+        if (gazeStatus.wearable.right.is_blink_valid == hmd2_gaze_bool_t.HMD2_GAZE_BOOL_TRUE)
         {
-            float rightOpenness;
-
-            if (eyeTrackingData.rightEye.isOpenEnabled && Core.Instance.PreferencesManager.EyeLidEstimation.Value)
-            {
-                rightOpenness = eyeTrackingData.rightEye.open;
-            }
-            else
-            {
-                rightOpenness = eyeTrackingData.rightEye.blink ? 0 : 1;
-            }
+            float rightOpenness = gazeStatus.wearable.right.blink == hmd2_gaze_bool_t.HMD2_GAZE_BOOL_TRUE ? 0 : 1;
             
             if (rightEyeFilter != null)
             {
@@ -76,26 +62,26 @@ public class PSVR2EyeTracking : TrackingProvider
             Tracking.EyeData.Right.Openness = rightOpenness;
         }
 
-        if (eyeTrackingData.leftEye.isGazeDirValid)
+        if (gazeStatus.wearable.left.is_gaze_dir_valid == hmd2_gaze_bool_t.HMD2_GAZE_BOOL_TRUE)
         {
-            Tracking.EyeData.Left.GazeX = -eyeTrackingData.leftEye.gazeDirNorm.x;
-            Tracking.EyeData.Left.GazeY =  eyeTrackingData.leftEye.gazeDirNorm.y;
+            Tracking.EyeData.Left.GazeX = -gazeStatus.wearable.left.gaze_dir_norm.x;
+            Tracking.EyeData.Left.GazeY =  gazeStatus.wearable.left.gaze_dir_norm.y;
         }
 
-        if (eyeTrackingData.rightEye.isGazeDirValid)
+        if (gazeStatus.wearable.right.is_gaze_dir_valid == hmd2_gaze_bool_t.HMD2_GAZE_BOOL_TRUE)
         {
-            Tracking.EyeData.Right.GazeX = -eyeTrackingData.rightEye.gazeDirNorm.x;
-            Tracking.EyeData.Right.GazeY =  eyeTrackingData.rightEye.gazeDirNorm.y;
+            Tracking.EyeData.Right.GazeX = -gazeStatus.wearable.right.gaze_dir_norm.x;
+            Tracking.EyeData.Right.GazeY =  gazeStatus.wearable.right.gaze_dir_norm.y;
         }
 
-        if (eyeTrackingData.leftEye.isPupilDiaValid)
+        if (gazeStatus.wearable.left.is_pupil_dia_valid == hmd2_gaze_bool_t.HMD2_GAZE_BOOL_TRUE)
         {
-            Tracking.EyeData.Left.PupilDiameterMm = eyeTrackingData.leftEye.pupilDiaMm;
+            Tracking.EyeData.Left.PupilDiameterMm = gazeStatus.wearable.left.pupil_dia_mm;
         }
 
-        if (eyeTrackingData.rightEye.isPupilDiaValid)
+        if (gazeStatus.wearable.right.is_pupil_dia_valid == hmd2_gaze_bool_t.HMD2_GAZE_BOOL_TRUE)
         {
-            Tracking.EyeData.Right.PupilDiameterMm = eyeTrackingData.rightEye.pupilDiaMm;
+            Tracking.EyeData.Right.PupilDiameterMm = gazeStatus.wearable.right.pupil_dia_mm;
         }
     }
 }

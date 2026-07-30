@@ -1,7 +1,7 @@
 ﻿using MelonLoader;
 using PSVR2.BoneMenu;
 using PSVR2.Features;
-using PSVR2.PSVR2ToolKit;
+using PSVR2.PSVR2Toolkit;
 using PSVR2.UserData;
 
 [assembly: MelonInfo(typeof(PSVR2.Core), "PSVR2", "0.0.1", "Checkerboard")]

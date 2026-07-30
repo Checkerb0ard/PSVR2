@@ -552,6 +552,6 @@
     </Target>
 
     <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-        <Exec Command="COPY &quot;$(TargetPath)&quot; &quot;$(GamePath)/Mods&quot;" />
+        <Exec Command="COPY &quot;$(TargetPath)&quot; &quot;$(BONELAB_DIR)/Mods&quot;" />
     </Target>
 </Project>

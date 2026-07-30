@@ -10,6 +10,9 @@ internal class BoneMenuManager
     
     internal BoolElement AdaptiveTriggers { get; private set; }
     
+    internal BoolElement HeadsetVibration { get; private set; }
+    internal IntElement HeadsetVibrationStrength { get; private set; }
+    
     internal BoolElement EyeLidEstimation { get; private set; }
     
     internal BoneMenuManager()
@@ -21,6 +24,21 @@ internal class BoneMenuManager
             var prefs = Core.Instance.PreferencesManager;
             
             prefs.AdaptiveTriggers.Value = b;
+            prefs.Save();
+        });
+        
+        HeadsetVibration = Page.CreateBool("Headset Vibration", Color.white, Core.Instance.PreferencesManager.HeadsetVibration.Value, b =>
+        {
+            var prefs = Core.Instance.PreferencesManager;
+            
+            prefs.HeadsetVibration.Value = b;
+            prefs.Save();
+        });
+        HeadsetVibrationStrength = Page.CreateInt("Headset Vibration Strength", Color.white, Core.Instance.PreferencesManager.HeadsetVibrationStrength.Value, 1, 1, 25, i =>
+        {
+            var prefs = Core.Instance.PreferencesManager;
+        
+            prefs.HeadsetVibrationStrength.Value = (byte)i;
             prefs.Save();
         });
 
