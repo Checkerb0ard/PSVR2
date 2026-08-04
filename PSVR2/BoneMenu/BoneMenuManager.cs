@@ -1,5 +1,4 @@
 ﻿using BoneLib.BoneMenu;
-using PSVR2.Utilities;
 using UnityEngine;
 
 namespace PSVR2.BoneMenu;
@@ -8,52 +7,60 @@ internal class BoneMenuManager
 {
     internal Page Page { get; private set; }
     
-    internal BoolElement AdaptiveTriggers { get; private set; }
+    internal Page AdaptiveTriggers { get; private set; }
+    internal BoolElement AdaptiveTriggersEnabled { get; private set; }
+    internal BoolElement SingleFireAdaptiveTriggersEnabled { get; private set; }
+    internal IntElement SingleFireAdaptiveTriggersFeedback { get; private set; }
+    internal BoolElement AutomaticAdaptiveTriggersEnabled { get; private set; }
+    internal IntElement AutomaticAdaptiveTriggersFeedback { get; private set; }
     
-    internal BoolElement HeadsetVibration { get; private set; }
+    internal Page HeadsetVibration { get; private set; }
+    internal BoolElement HeadsetVibrationEnabled { get; private set; }
     internal IntElement HeadsetVibrationStrength { get; private set; }
-    
-    internal BoolElement EyeLidEstimation { get; private set; }
     
     internal BoneMenuManager()
     {
+        var prefs = Core.Instance.PreferencesManager;
+        
         Page = Page.Root.CreatePage("PSVR2", new Color32(0, 100, 220, 255));
         
-        AdaptiveTriggers = Page.CreateBool("Adaptive Triggers", Color.white, Core.Instance.PreferencesManager.AdaptiveTriggers.Value, b =>
+        AdaptiveTriggers = Page.CreatePage("Adaptive Triggers", Color.white);
+        AdaptiveTriggersEnabled = AdaptiveTriggersEnabled = AdaptiveTriggers.CreateBool("Enabled", Color.white, Core.Instance.PreferencesManager.AdaptiveTriggers.Value, b =>
         {
-            var prefs = Core.Instance.PreferencesManager;
-            
             prefs.AdaptiveTriggers.Value = b;
             prefs.Save();
         });
-        
-        HeadsetVibration = Page.CreateBool("Headset Vibration", Color.white, Core.Instance.PreferencesManager.HeadsetVibration.Value, b =>
+        SingleFireAdaptiveTriggersEnabled = AdaptiveTriggers.CreateBool("Single Fire", Color.white, Core.Instance.PreferencesManager.SingleFireAdaptiveTriggers.Value, b =>
         {
-            var prefs = Core.Instance.PreferencesManager;
-            
+            prefs.SingleFireAdaptiveTriggers.Value = b;
+            prefs.Save();
+        });
+        SingleFireAdaptiveTriggersFeedback = AdaptiveTriggers.CreateInt("Single Fire Feedback", Color.white, Core.Instance.PreferencesManager.SingleFireAdaptiveTriggersFeedback.Value, 1, 1, 25, i =>
+        {
+            prefs.SingleFireAdaptiveTriggersFeedback.Value = (byte)i;
+            prefs.Save();
+        });
+        AutomaticAdaptiveTriggersEnabled = AdaptiveTriggers.CreateBool("Automatic", Color.white, Core.Instance.PreferencesManager.AutomaticAdaptiveTriggers.Value, b =>
+        {
+            prefs.AutomaticAdaptiveTriggers.Value = b;
+            prefs.Save();
+        });
+        AutomaticAdaptiveTriggersFeedback = AdaptiveTriggers.CreateInt("Automatic Feedback", Color.white, Core.Instance.PreferencesManager.AutomaticAdaptiveTriggersFeedback.Value, 1, 1, 8, i =>
+        {
+            prefs.AutomaticAdaptiveTriggersFeedback.Value = (byte)i;
+            prefs.Save();
+        });
+        
+        HeadsetVibration = Page.CreatePage("Headset Vibration", Color.white);
+        HeadsetVibrationEnabled = HeadsetVibration.CreateBool("Enabled", Color.white, Core.Instance.PreferencesManager.HeadsetVibration.Value, b =>
+        {
             prefs.HeadsetVibration.Value = b;
             prefs.Save();
         });
-        HeadsetVibrationStrength = Page.CreateInt("Headset Vibration Strength", Color.white, Core.Instance.PreferencesManager.HeadsetVibrationStrength.Value, 1, 1, 25, i =>
+        HeadsetVibrationStrength = HeadsetVibration.CreateInt("Headset Vibration Strength", Color.white, Core.Instance.PreferencesManager.HeadsetVibrationStrength.Value, 1, 1, 25, i =>
         {
-            var prefs = Core.Instance.PreferencesManager;
-        
             prefs.HeadsetVibrationStrength.Value = (byte)i;
             prefs.Save();
         });
-
-        if (MelonUtilities.HasEyeTracking())
-        {
-            EyeLidEstimation = Page.CreateBool("EyeLid Estimation", Color.white, Core.Instance.PreferencesManager.EyeLidEstimation.Value, b =>
-            {
-                var prefs = Core.Instance.PreferencesManager;
-                
-                prefs.EyeLidEstimation.Value = b;
-                prefs.Save();
-            });
-            EyeLidEstimation.SetTooltip("Whether to use PSVR2Toolkit EyeLid estimation instead of binary blink for eye tracking. \n" +
-                                        "Will only work if you have enabled EyeLid estimation in PSVR2Toolkit. \n" +
-                                        "Please see their discord for instructions on how to enable this.");
-        }
     }
 }

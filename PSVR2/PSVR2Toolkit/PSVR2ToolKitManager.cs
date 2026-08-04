@@ -10,7 +10,6 @@ internal class PSVR2ToolKitManager
     {
         try
         {
-
             var result = PSVR2ToolkitCAPI.Init();
             Core.Instance.LoggerInstance.Msg("PSVR2ToolKit init result: " + result);
             if (result != 0)

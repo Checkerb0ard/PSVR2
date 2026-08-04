@@ -34,7 +34,6 @@ public class PSVR2EyeTracking : TrackingProvider
         
         if (!PSVR2ToolkitCAPI.GetGazeStatus(ref gazeStatus, 1000))
         {
-            Core.Instance.LoggerInstance.Error("Failed to get gaze status from PSVR2Toolkit.");
             return;
         }
 

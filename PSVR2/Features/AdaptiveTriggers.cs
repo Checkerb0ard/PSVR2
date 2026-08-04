@@ -2,6 +2,7 @@ using BoneLib;
 using HarmonyLib;
 using Il2CppSLZ.Marrow;
 using PSVR2Toolkit;
+using UnityEngine;
 
 namespace PSVR2.Features;
 
@@ -16,9 +17,9 @@ internal class AdaptiveTriggers : IFeature
 
     internal static byte WeaponStart = 2;
     internal static byte WeaponEnd = 4;
-    internal static byte WeaponStrength => Core.Instance.PreferencesManager.SingleFireFeedback.Value;
+    internal static byte WeaponStrength => Core.Instance.PreferencesManager.SingleFireAdaptiveTriggersFeedback.Value;
     internal static byte VibrationPosition = 4;
-    internal static byte VibrationAmplitude = 8;
+    internal static byte VibrationAmplitude => Core.Instance.PreferencesManager.AutomaticAdaptiveTriggersFeedback.Value;
 
     public void Initialize()
     {
@@ -60,6 +61,9 @@ internal class AdaptiveTriggers : IFeature
 
         internal static void SetWeapon(VRControllerType controller, byte start, byte end, byte strength)
         {
+            if (!Core.Instance.PreferencesManager.SingleFireAdaptiveTriggers.Value)
+                return;
+
             var s = States[controller];
 
             if (s.Mode == FeedbackMode.Weapon &&
@@ -75,6 +79,9 @@ internal class AdaptiveTriggers : IFeature
 
         internal static void SetVibration(VRControllerType controller, byte pos, byte amp, byte freq)
         {
+            if (!Core.Instance.PreferencesManager.AutomaticAdaptiveTriggers.Value)
+                return;
+            
             var s = States[controller];
 
             if (s.Mode == FeedbackMode.Vibration &&
@@ -175,9 +182,7 @@ internal class AdaptiveTriggers : IFeature
                 return;
             }
 
-            if (__instance._magState == null ||
-                __instance._ammoInventory == null ||
-                __instance.chamberedCartridge == null)
+            if (__instance._magState == null || __instance._ammoInventory == null || __instance.chamberedCartridge == null)
             {
                 TriggerManager.SetNone(controller);
                 return;
@@ -187,20 +192,12 @@ internal class AdaptiveTriggers : IFeature
             {
                 case Gun.FireMode.MANUAL:
                 case Gun.FireMode.SEMIAUTOMATIC:
-                    TriggerManager.SetWeapon(controller,
-                        WeaponStart,
-                        WeaponEnd,
-                        WeaponStrength);
+                    TriggerManager.SetWeapon(controller, WeaponStart, WeaponEnd, WeaponStrength);
                     break;
 
                 case Gun.FireMode.AUTOMATIC:
-                    byte freq = Convert.ToByte(Math.Min(40,
-                        (int)Math.Round(__instance.roundsPerMinute / 60)));
-
-                    TriggerManager.SetVibration(controller,
-                        VibrationPosition,
-                        VibrationAmplitude,
-                        freq);
+                    byte freq = Convert.ToByte(Math.Min(40, Mathf.RoundToInt((__instance.roundsPerMinute * Time.timeScale) / 60f)));
+                    TriggerManager.SetVibration(controller, VibrationPosition, VibrationAmplitude, freq);
                     break;
             }
         }
