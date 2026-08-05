@@ -192,12 +192,14 @@ internal class AdaptiveTriggers : IFeature
             {
                 case Gun.FireMode.MANUAL:
                 case Gun.FireMode.SEMIAUTOMATIC:
-                    TriggerManager.SetWeapon(controller, WeaponStart, WeaponEnd, WeaponStrength);
+                    byte strength = Math.Clamp(WeaponStrength, (byte)0, (byte)8);
+                    TriggerManager.SetWeapon(controller, WeaponStart, WeaponEnd, strength);
                     break;
 
                 case Gun.FireMode.AUTOMATIC:
-                    byte freq = Convert.ToByte(Math.Min(40, Mathf.RoundToInt((__instance.roundsPerMinute * Time.timeScale) / 60f)));
-                    TriggerManager.SetVibration(controller, VibrationPosition, VibrationAmplitude, freq);
+                    byte amplitude = Math.Clamp(VibrationAmplitude, (byte)0, (byte)8);
+                    byte freq = Math.Clamp(Convert.ToByte(Math.Min(40, Mathf.RoundToInt(__instance.roundsPerMinute * Time.timeScale / 60f))), (byte)0, (byte)255);
+                    TriggerManager.SetVibration(controller, VibrationPosition, amplitude, freq);
                     break;
             }
         }

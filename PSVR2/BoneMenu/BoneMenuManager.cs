@@ -35,7 +35,7 @@ internal class BoneMenuManager
             prefs.SingleFireAdaptiveTriggers.Value = b;
             prefs.Save();
         });
-        SingleFireAdaptiveTriggersFeedback = AdaptiveTriggers.CreateInt("Single Fire Feedback", Color.white, Core.Instance.PreferencesManager.SingleFireAdaptiveTriggersFeedback.Value, 1, 1, 25, i =>
+        SingleFireAdaptiveTriggersFeedback = AdaptiveTriggers.CreateInt("Single Fire Feedback", Color.white, Core.Instance.PreferencesManager.SingleFireAdaptiveTriggersFeedback.Value, 1, 1, 8, i =>
         {
             prefs.SingleFireAdaptiveTriggersFeedback.Value = (byte)i;
             prefs.Save();

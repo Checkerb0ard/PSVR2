@@ -37,7 +37,8 @@ internal class HeadsetVibration : IFeature
             if (__instance._rigManager != Player.RigManager)
                 return;
             
-            PSVR2ToolkitCAPI.SetHmdRumble(Core.Instance.PreferencesManager.HeadsetVibrationStrength.Value);
+            byte strength = Math.Clamp(Core.Instance.PreferencesManager.HeadsetVibrationStrength.Value, (byte)0, (byte)25);
+            PSVR2ToolkitCAPI.SetHmdRumble(strength);
 
             _rumbleActive = true;
             _rumbleEndTime = Time.time + 0.5f;
